@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "wwkeyboardshadowview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWKeyboardShadowView",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e24b3b915480dc6611c63b42beeb7b3182cfa409"
+      }
+    },
+    {
+      "identity" : "wwprint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWPrint",
+      "state" : {
+        "revision" : "0acf1057863faea81c3ded2057c21b09c3435435",
+        "version" : "1.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}
