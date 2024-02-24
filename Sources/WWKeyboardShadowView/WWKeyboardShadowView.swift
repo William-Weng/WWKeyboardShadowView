@@ -93,7 +93,7 @@ private extension WWKeyboardShadowView {
     /// - Parameter notification: Notification
     func keyboardNotification(_ notification: Notification) {
         
-        guard let info = UIDevice._keyboardInfomation(notification: notification),
+        guard let info = UIDevice._keyboardInformation(notification: notification),
               let curveType = UIView.AnimationCurve(rawValue: Int(info.curve)),
               let target = target
         else {

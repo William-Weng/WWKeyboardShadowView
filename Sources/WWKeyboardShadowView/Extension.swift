@@ -14,7 +14,7 @@ extension UIDevice {
     /// - UIResponder.keyboardDidShowNotification / UIResponder.keyboardDidHideNotification
     /// - Parameter notification: 鍵盤的notification
     /// - Returns: Constant.KeyboardInfomation?
-    static func _keyboardInfomation(notification: Notification) -> WWKeyboardShadowView.KeyboardInfomation? {
+    static func _keyboardInformation(notification: Notification) -> WWKeyboardShadowView.KeyboardInfomation? {
         
         guard let userInfo = notification.userInfo,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,

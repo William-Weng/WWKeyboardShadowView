@@ -13,8 +13,9 @@
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
 		3DBCD87D26F198F300522E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87C26F198F300522E3B /* Assets.xcassets */; };
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
+		64BDB1702B8AB1D600B17D1A /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 64BDB16F2B8AB1D600B17D1A /* WWKeyboardShadowView */; };
+		64BDB1732B8AB20000B17D1A /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 64BDB1722B8AB20000B17D1A /* WWKeyboardShadowView */; };
 		817EE72F2B86E55300F03C44 /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */; };
-		817EE7322B86EA6800F03C44 /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 817EE7312B86EA6800F03C44 /* WWKeyboardShadowView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,9 +33,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64BDB1732B8AB20000B17D1A /* WWKeyboardShadowView in Frameworks */,
 				817EE72F2B86E55300F03C44 /* WWKeyboardShadowView in Frameworks */,
 				3DAC9C1927016E78006663C2 /* WWPrint in Frameworks */,
-				817EE7322B86EA6800F03C44 /* WWKeyboardShadowView in Frameworks */,
+				64BDB1702B8AB1D600B17D1A /* WWKeyboardShadowView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +131,8 @@
 			packageProductDependencies = (
 				3DAC9C1827016E78006663C2 /* WWPrint */,
 				817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */,
-				817EE7312B86EA6800F03C44 /* WWKeyboardShadowView */,
+				64BDB16F2B8AB1D600B17D1A /* WWKeyboardShadowView */,
+				64BDB1722B8AB20000B17D1A /* WWKeyboardShadowView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -161,7 +164,7 @@
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
 				3DAC9C1727016E78006663C2 /* XCRemoteSwiftPackageReference "WWPrint" */,
-				817EE7302B86EA6800F03C44 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */,
+				64BDB1712B8AB20000B17D1A /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -411,12 +414,12 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		817EE7302B86EA6800F03C44 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */ = {
+		64BDB1712B8AB20000B17D1A /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/William-Weng/WWKeyboardShadowView";
+			repositoryURL = "https://github.com/William-Weng/WWKeyboardShadowView.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -427,13 +430,17 @@
 			package = 3DAC9C1727016E78006663C2 /* XCRemoteSwiftPackageReference "WWPrint" */;
 			productName = WWPrint;
 		};
-		817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */ = {
+		64BDB16F2B8AB1D600B17D1A /* WWKeyboardShadowView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WWKeyboardShadowView;
 		};
-		817EE7312B86EA6800F03C44 /* WWKeyboardShadowView */ = {
+		64BDB1722B8AB20000B17D1A /* WWKeyboardShadowView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 817EE7302B86EA6800F03C44 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */;
+			package = 64BDB1712B8AB20000B17D1A /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */;
+			productName = WWKeyboardShadowView;
+		};
+		817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = WWKeyboardShadowView;
 		};
 /* End XCSwiftPackageProductDependency section */
