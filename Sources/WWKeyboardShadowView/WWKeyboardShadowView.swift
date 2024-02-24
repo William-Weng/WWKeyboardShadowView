@@ -115,12 +115,14 @@ private extension WWKeyboardShadowView {
         
         keyboardConstraintHeight?.constant = height
         
-        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) { [unowned self] in
-            target?.view.layoutIfNeeded()
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) { [weak self] in
+            guard let this = self else { return }
+            this.target?.view.layoutIfNeeded()
         }
         
-        animator.addCompletion { [unowned self] _ in
-            target?.keyboardDidChange(view: self)
+        animator.addCompletion { [weak self] _ in
+            guard let this = self else { return }
+            this.target?.keyboardDidChange(view: this)
         }
         
         animator.startAnimation()
