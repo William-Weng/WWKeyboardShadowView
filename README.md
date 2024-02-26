@@ -21,7 +21,7 @@ dependencies: [
 |-|-|
 |configure(target:keyboardConstraintHeight:)|設定初始View相關參數|
 |register()|註冊鍵盤事件|
-|removeKeyboardNotification()|解除鍵盤事件|
+|unregister()|解除鍵盤事件|
 
 ### Example
 ```swift
