@@ -14,6 +14,9 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .target(name: "WWKeyboardShadowView", dependencies: [], resources: [.process("Xib")]),
+        .target(name: "WWKeyboardShadowView", resources: [.process("Xib"), .copy("Privacy")]),
+    ],
+    swiftLanguageVersions: [
+        .v5
     ]
 )
