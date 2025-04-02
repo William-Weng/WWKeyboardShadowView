@@ -16,14 +16,14 @@ dependencies: [
 ]
 ```
 
-### 可用函式
+### [可用函式](https://ezgif.com/video-to-webp)
 |函式|說明|
 |-|-|
 |configure(target:keyboardConstraintHeight:)|設定初始View相關參數|
 |register()|註冊鍵盤事件|
 |unregister()|解除鍵盤事件|
 
-###
+### Delegate
 |函式|說明|
 |-|-|
 |keyboardViewChange(_:status:information:)|鍵盤View的顯示狀態 / 可不可以改變|
@@ -63,7 +63,6 @@ extension ViewController: WWKeyboardShadowView.Delegate {
 
 private extension ViewController {
     
-    /// 初始化設定
     func initSetting() {
         keyboardShadowView.configure(target: self, keyboardConstraintHeight: shadowViewHeightConstraint)
         keyboardShadowView.register()
