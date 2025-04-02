@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WWPrint
 import WWKeyboardShadowView
 
 // MARK: - ViewController
@@ -26,16 +25,15 @@ final class ViewController: UIViewController {
     }
 }
 
-// MARK: - WWKeyboardShadowViewDelegate
-extension ViewController: WWKeyboardShadowViewDelegate {
+// MARK: - WWKeyboardShadowView.Delegate
+extension ViewController: WWKeyboardShadowView.Delegate {
     
-    func keyboardWillChange(view: WWKeyboardShadowView, information: WWKeyboardShadowView.KeyboardInfomation) -> Bool {
-        wwPrint("keyboardWillChange")
+    func keyboardViewChange(_ view: WWKeyboardShadowView, status: WWKeyboardShadowView.DisplayStatus, information: WWKeyboardShadowView.KeyboardInformation, height: CGFloat) -> Bool {
         return true
     }
     
-    func keyboardDidChange(view: WWKeyboardShadowView) {
-        wwPrint("keyboardDidChange")
+    func keyboardView(_ view: WWKeyboardShadowView, error: WWKeyboardShadowView.CustomError) {
+        print(error)
     }
 }
 

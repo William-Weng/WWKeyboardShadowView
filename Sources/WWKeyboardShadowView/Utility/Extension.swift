@@ -1,8 +1,8 @@
 //
 //  Extension.swift
-//  
+//  WWKeyboardShadowView
 //
-//  Created by iOS on 2024/2/22.
+//  Created by Willliam.Weng on 2025/4/2.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ extension UIDevice {
     /// - UIResponder.keyboardDidShowNotification / UIResponder.keyboardDidHideNotification
     /// - Parameter notification: 鍵盤的notification
     /// - Returns: Constant.KeyboardInfomation?
-    static func _keyboardInfomation(notification: Notification) -> WWKeyboardShadowView.KeyboardInfomation? {
+    static func _keyboardInfomation(notification: Notification) -> WWKeyboardShadowView.KeyboardInformation? {
         
         guard let userInfo = notification.userInfo,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,

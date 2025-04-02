@@ -1,43 +1,36 @@
 //
 //  WWKeyboardShadowView.swift
-//  ChatGPTAPI
+//  WWKeyboardShadowView
 //
-//  Created by William.Weng on 2024/2/21.
+//  Created by Willliam.Weng on 2025/4/2.
 //
 
 import UIKit
 
-/// MARk: - WWKeyboardShadowViewDelegate
-public protocol WWKeyboardShadowViewDelegate: AnyObject {
-    
-    func keyboardWillChange(view: WWKeyboardShadowView, information: WWKeyboardShadowView.KeyboardInfomation) -> Bool
-    func keyboardDidChange(view: WWKeyboardShadowView)
-}
-
-/// MARk: - 開放函式
+/// MARk: - 處理鍵盤高度的View
 open class WWKeyboardShadowView: UIView {
-    
-    public typealias KeyboardInfomation = (duration: Double, curve: UInt, frame: CGRect)    // 取得系統鍵盤的相關資訊
-    
+        
     @IBOutlet weak var view: UIView!
     
-    weak var target: (UIViewController & WWKeyboardShadowViewDelegate)?
-    
+    private weak var target: (UIViewController & WWKeyboardShadowView.Delegate)?
     private weak var keyboardConstraintHeight: NSLayoutConstraint?
     
-    override public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initViewFromXib()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initViewFromXib()
     }
     
-    @objc func keyboardWillChange(_ notification: Notification) { keyboardNotification(notification) }
+    @objc func keyboardChangeAction(_ notification: Notification) { keyboardNotification(notification) }
     
-    deinit { unregister() }
+    deinit {
+        target = nil
+        unregister()
+    }
 }
 
 /// MARk: - 開放函式
@@ -45,9 +38,9 @@ public extension WWKeyboardShadowView {
     
     /// 初始值設定
     /// - Parameters:
-    ///   - target: UIViewController & WWKeyboardShadowViewDelegate>
+    ///   - target: UIViewController & WWKeyboardShadowView.Delegate>
     ///   - keyboardConstraintHeight: NSLayoutConstraint
-    func configure(target: (UIViewController & WWKeyboardShadowViewDelegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint) {
+    func configure(target: (UIViewController & WWKeyboardShadowView.Delegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint?) {
         self.keyboardConstraintHeight = keyboardConstraintHeight
         self.target = target
     }
@@ -76,8 +69,8 @@ private extension WWKeyboardShadowView {
     
     /// 鍵盤顯示 / 隱藏通知設定
     func keyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeAction), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChangeAction), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     /// 移除通知設定
@@ -95,15 +88,23 @@ private extension WWKeyboardShadowView {
         
         guard let info = UIDevice._keyboardInfomation(notification: notification),
               let curveType = UIView.AnimationCurve(rawValue: Int(info.curve)),
-              let target = target
+              let target = target,
+              let keyboardConstraintHeight = keyboardConstraintHeight
         else {
-            return
+            target?.keyboardView(self, error: .notHeightConstraint); return
         }
         
         let height = target.view.frame.height - info.frame.origin.y
         
-        let isWillChange = target.keyboardWillChange(view: self, information: info)
-        if (isWillChange) { updateHeightConstraint(height: height, duration: info.duration, curve: curveType) }
+        var isWillChange: Bool = false
+        
+        switch notification.name {
+        case UIResponder.keyboardWillShowNotification: isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
+        case UIResponder.keyboardWillHideNotification: isWillChange = target.keyboardViewChange(self, status: .willHide, information: info, height: height)
+        default: break
+        }
+        
+        if (isWillChange) { updateHeightConstraint(height: height, info: info, curve: curveType) }
     }
     
     /// 更新高度
@@ -111,18 +112,23 @@ private extension WWKeyboardShadowView {
     ///   - height: CGFloat
     ///   - duration: Double
     ///   - curve: UIView.AnimationCurve
-    func updateHeightConstraint(height: CGFloat, duration: Double, curve: UIView.AnimationCurve) {
+    func updateHeightConstraint(height: CGFloat, info: WWKeyboardShadowView.KeyboardInformation, curve: UIView.AnimationCurve) {
         
-        keyboardConstraintHeight?.constant = height
+        guard let keyboardConstraintHeight = keyboardConstraintHeight else { return }
         
-        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) { [weak self] in
+        keyboardConstraintHeight.constant = height
+        
+        let animator = UIViewPropertyAnimator(duration: info.duration, curve: curve) { [weak self] in
             guard let this = self else { return }
             this.target?.view.layoutIfNeeded()
         }
         
         animator.addCompletion { [weak self] _ in
+            
             guard let this = self else { return }
-            this.target?.keyboardDidChange(view: this)
+            
+            let displayStatus: DisplayStatus = (height != 0) ? .didShow : .didHide
+            _ = this.target?.keyboardViewChange(this, status: displayStatus, information: info, height: height)
         }
         
         animator.startAnimation()

@@ -12,7 +12,7 @@
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.1.0"))
 ]
 ```
 
@@ -23,10 +23,15 @@ dependencies: [
 |register()|註冊鍵盤事件|
 |unregister()|解除鍵盤事件|
 
+###
+|函式|說明|
+|-|-|
+|keyboardViewChange(_:status:information:)|鍵盤View的顯示狀態 / 可不可以改變|
+|keyboardView(_:error:)|錯誤提示|
+
 ### Example
 ```swift
 import UIKit
-import WWPrint
 import WWKeyboardShadowView
 
 final class ViewController: UIViewController {
@@ -45,20 +50,20 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: WWKeyboardShadowViewDelegate {
+extension ViewController: WWKeyboardShadowView.Delegate {
     
-    func keyboardWillChange(view: WWKeyboardShadowView, information: WWKeyboardShadowView.KeyboardInfomation) -> Bool {
-        wwPrint("keyboardWillChange")
+    func keyboardViewChange(_ view: WWKeyboardShadowView, status: WWKeyboardShadowView.DisplayStatus, information: WWKeyboardShadowView.KeyboardInformation, height: CGFloat) -> Bool {
         return true
     }
     
-    func keyboardDidChange(view: WWKeyboardShadowView) {
-        wwPrint("keyboardDidChange")
+    func keyboardView(_ view: WWKeyboardShadowView, error: WWKeyboardShadowView.CustomError) {
+        print(error)
     }
 }
 
 private extension ViewController {
     
+    /// 初始化設定
     func initSetting() {
         keyboardShadowView.configure(target: self, keyboardConstraintHeight: shadowViewHeightConstraint)
         keyboardShadowView.register()
