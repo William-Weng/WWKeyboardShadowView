@@ -106,7 +106,7 @@ private extension WWKeyboardShadowView {
         case UIResponder.keyboardWillShowNotification:
             isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
         case UIResponder.keyboardWillHideNotification:
-            height = height + target.view.safeAreaInsets.bottom
+            if (useSafeAreaInsets) { height = height + target.view.safeAreaInsets.bottom }
             isWillChange = target.keyboardViewChange(self, status: .willHide, information: info, height: height)
         default: break
         }

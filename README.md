@@ -6,13 +6,13 @@
 - [A View that can interact with keyboard events can change simultaneously with the height of the keyboard, simply and effectively solving the problem of the input box being blocked during text input.](https://github.com/hackiftekhar/IQKeyboardManager)
 - [一個能跟鍵盤事件互動的View，能與鍵盤高度同時做變化，簡單有效處理文字輸入時，輸入框被檔住的問題。](https://medium.com/彼得潘的-swift-ios-app-開發教室/18-ios-鍵盤通知-監聽-d45bd97841a6)
 
-![](./Example.gif)
+![](./Example.webp)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.1.1"))
+    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.1.2"))
 ]
 ```
 
