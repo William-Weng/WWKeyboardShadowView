@@ -24,6 +24,13 @@ public extension WWKeyboardShadowView {
         case didHide
     }
     
+    /// 修正底邊高度影響的類型
+    enum BottomType {
+        case `none`
+        case safeAreaInsets
+        case custom(_ bottom: CGFloat)
+    }
+    
     /// 自定義錯誤
     enum CustomError: Error {
         

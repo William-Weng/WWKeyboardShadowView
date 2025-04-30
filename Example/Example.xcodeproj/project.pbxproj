@@ -12,7 +12,8 @@
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
 		3DBCD87D26F198F300522E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87C26F198F300522E3B /* Assets.xcassets */; };
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
-		8158543B2DC1B6DF0043DEF4 /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 8158543A2DC1B6DF0043DEF4 /* WWKeyboardShadowView */; };
+		8159F6FE2DC1B9940033936B /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 8159F6FD2DC1B9940033936B /* WWKeyboardShadowView */; };
+		8159F7012DC1BBC30033936B /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 8159F7002DC1BBC30033936B /* WWKeyboardShadowView */; };
 		816C4B7F2DC1B5E7001D0796 /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 816C4B7E2DC1B5E7001D0796 /* WWKeyboardShadowView */; };
 		817EE72F2B86E55300F03C44 /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */; };
 		81DB1FFF2D9CCAF100C20D8D /* WWKeyboardShadowView in Frameworks */ = {isa = PBXBuildFile; productRef = 81DB1FFE2D9CCAF100C20D8D /* WWKeyboardShadowView */; };
@@ -33,7 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8158543B2DC1B6DF0043DEF4 /* WWKeyboardShadowView in Frameworks */,
+				8159F7012DC1BBC30033936B /* WWKeyboardShadowView in Frameworks */,
+				8159F6FE2DC1B9940033936B /* WWKeyboardShadowView in Frameworks */,
 				81DB1FFF2D9CCAF100C20D8D /* WWKeyboardShadowView in Frameworks */,
 				817EE72F2B86E55300F03C44 /* WWKeyboardShadowView in Frameworks */,
 				816C4B7F2DC1B5E7001D0796 /* WWKeyboardShadowView in Frameworks */,
@@ -132,7 +134,8 @@
 				817EE72E2B86E55300F03C44 /* WWKeyboardShadowView */,
 				81DB1FFE2D9CCAF100C20D8D /* WWKeyboardShadowView */,
 				816C4B7E2DC1B5E7001D0796 /* WWKeyboardShadowView */,
-				8158543A2DC1B6DF0043DEF4 /* WWKeyboardShadowView */,
+				8159F6FD2DC1B9940033936B /* WWKeyboardShadowView */,
+				8159F7002DC1BBC30033936B /* WWKeyboardShadowView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -163,7 +166,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				815854392DC1B6DF0043DEF4 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */,
+				8159F6FF2DC1BBC30033936B /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -409,7 +412,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		815854392DC1B6DF0043DEF4 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */ = {
+		8159F6FF2DC1BBC30033936B /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWKeyboardShadowView";
 			requirement = {
@@ -420,9 +423,13 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8158543A2DC1B6DF0043DEF4 /* WWKeyboardShadowView */ = {
+		8159F6FD2DC1B9940033936B /* WWKeyboardShadowView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 815854392DC1B6DF0043DEF4 /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */;
+			productName = WWKeyboardShadowView;
+		};
+		8159F7002DC1BBC30033936B /* WWKeyboardShadowView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8159F6FF2DC1BBC30033936B /* XCRemoteSwiftPackageReference "WWKeyboardShadowView" */;
 			productName = WWKeyboardShadowView;
 		};
 		816C4B7E2DC1B5E7001D0796 /* WWKeyboardShadowView */ = {

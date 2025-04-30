@@ -15,7 +15,7 @@ open class WWKeyboardShadowView: UIView {
     private weak var target: (UIViewController & WWKeyboardShadowView.Delegate)?
     private weak var keyboardConstraintHeight: NSLayoutConstraint?
     
-    private var useSafeAreaInsets = true
+    private var bottomType: BottomType = .safeAreaInsets
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,10 +44,10 @@ public extension WWKeyboardShadowView {
     ///   - target: UIViewController & WWKeyboardShadowView.Delegate>
     ///   - keyboardConstraintHeight: NSLayoutConstraint
     ///   - useSafeAreaInsets: 是否使用SafeArea的邊距 (收鍵盤的底部邊距)
-    func configure(target: (UIViewController & WWKeyboardShadowView.Delegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint?, useSafeAreaInsets: Bool = true) {
+    func configure(target: (UIViewController & WWKeyboardShadowView.Delegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint?, bottomType: BottomType = .safeAreaInsets) {
         self.keyboardConstraintHeight = keyboardConstraintHeight
         self.target = target
-        self.useSafeAreaInsets = useSafeAreaInsets
+        self.bottomType = bottomType
     }
     
     /// 註冊鍵盤事件
@@ -103,17 +103,16 @@ private extension WWKeyboardShadowView {
         var isWillChange: Bool = false
                 
         switch notification.name {
-        case UIResponder.keyboardWillShowNotification:
-            isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
+        case UIResponder.keyboardWillShowNotification: isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
         case UIResponder.keyboardWillHideNotification:
-            if (useSafeAreaInsets) { height = height + target.view.safeAreaInsets.bottom }
+            height = height + fixBottomHeight(with: bottomType)
             isWillChange = target.keyboardViewChange(self, status: .willHide, information: info, height: height)
         default: break
         }
         
         if (isWillChange) { updateHeightConstraint(height: height, info: info, curve: curveType) }
     }
-    
+        
     /// 更新高度
     /// - Parameters:
     ///   - height: CGFloat
@@ -139,5 +138,17 @@ private extension WWKeyboardShadowView {
         }
         
         animator.startAnimation()
+    }
+    
+    /// 修正底邊高度
+    /// - Parameter type: BottomType
+    /// - Returns: CGFloat
+    func fixBottomHeight(with type: BottomType) -> CGFloat {
+        
+        switch type {
+        case .none: return 0
+        case .safeAreaInsets: return target?.view.safeAreaInsets.bottom ?? 0
+        case .custom(let bottom): return bottom
+        }
     }
 }
