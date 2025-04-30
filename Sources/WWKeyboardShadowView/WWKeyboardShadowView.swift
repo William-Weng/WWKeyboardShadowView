@@ -15,6 +15,8 @@ open class WWKeyboardShadowView: UIView {
     private weak var target: (UIViewController & WWKeyboardShadowView.Delegate)?
     private weak var keyboardConstraintHeight: NSLayoutConstraint?
     
+    private var useSafeAreaInsets = true
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initViewFromXib()
@@ -29,6 +31,7 @@ open class WWKeyboardShadowView: UIView {
     
     deinit {
         target = nil
+        keyboardConstraintHeight = nil
         unregister()
     }
 }
@@ -40,9 +43,11 @@ public extension WWKeyboardShadowView {
     /// - Parameters:
     ///   - target: UIViewController & WWKeyboardShadowView.Delegate>
     ///   - keyboardConstraintHeight: NSLayoutConstraint
-    func configure(target: (UIViewController & WWKeyboardShadowView.Delegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint?) {
+    ///   - useSafeAreaInsets: 是否使用SafeArea的邊距 (收鍵盤的底部邊距)
+    func configure(target: (UIViewController & WWKeyboardShadowView.Delegate)? = nil, keyboardConstraintHeight: NSLayoutConstraint?, useSafeAreaInsets: Bool = true) {
         self.keyboardConstraintHeight = keyboardConstraintHeight
         self.target = target
+        self.useSafeAreaInsets = useSafeAreaInsets
     }
     
     /// 註冊鍵盤事件
@@ -94,13 +99,15 @@ private extension WWKeyboardShadowView {
             target?.keyboardView(self, error: .notHeightConstraint); return
         }
         
-        let height = target.view.frame.height - info.frame.origin.y
-        
+        var height = target.view.frame.height - info.frame.origin.y
         var isWillChange: Bool = false
-        
+                
         switch notification.name {
-        case UIResponder.keyboardWillShowNotification: isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
-        case UIResponder.keyboardWillHideNotification: isWillChange = target.keyboardViewChange(self, status: .willHide, information: info, height: height)
+        case UIResponder.keyboardWillShowNotification:
+            isWillChange = target.keyboardViewChange(self, status: .willShow, information: info, height: height)
+        case UIResponder.keyboardWillHideNotification:
+            height = height + target.view.safeAreaInsets.bottom
+            isWillChange = target.keyboardViewChange(self, status: .willHide, information: info, height: height)
         default: break
         }
         

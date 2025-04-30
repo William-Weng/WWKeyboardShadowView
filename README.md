@@ -12,14 +12,14 @@
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.1.0"))
+    .package(url: "https://github.com/William-Weng/WWKeyboardShadowView.git", .upToNextMajor(from: "1.1.1"))
 ]
 ```
 
 ### [可用函式](https://ezgif.com/video-to-webp)
 |函式|說明|
 |-|-|
-|configure(target:keyboardConstraintHeight:)|設定初始View相關參數|
+|configure(target:keyboardConstraintHeight:useSafeAreaInsets:)|設定初始View相關參數|
 |register()|註冊鍵盤事件|
 |unregister()|解除鍵盤事件|
 
